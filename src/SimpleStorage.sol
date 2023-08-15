@@ -12,8 +12,20 @@ contract SimpleStorage {
     Person[] public listOfPeople;
     mapping(string => uint256) public nameToFavoriteNumber;
 
-    function store(uint256 _favoriteNumber) public {
+    event storedNumber(
+        uint256 indexed olderNumber,
+        uint256 indexed newNumber,
+        uint256 addNumber,
+        address sender
+    );
 
+    function store(uint256 _favoriteNumber) public {
+        emit storedNumber(
+            myFavoriteNumber,
+            _favoriteNumber,
+            myFavoriteNumber + _favoriteNumber,
+            msg.sender
+        );
         myFavoriteNumber = _favoriteNumber;
     }
 
